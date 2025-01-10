@@ -6,6 +6,7 @@
   ] ++ (if !isServer then [ 
     ./fonts
     ./fcitx5
+    ./terminal
   ] else []);
   home.packages = with pkgs; [
     btop
