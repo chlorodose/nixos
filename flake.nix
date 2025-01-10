@@ -46,5 +46,37 @@
           }
         ];
       };
+    
+    nixosConfigurations."cl-laptop" = 
+    let 
+      system = "x86_64-linux";
+      specialArgs = {
+        proxyHost = "192.168.0.1";
+        isServer = false;
+        pkgs-stable = import nixpkgs-stable { inherit system; };
+      };
+    in 
+      nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [
+          { networking.hostName = "cl-laptop"; }
+          ./overlays
+
+          ./hosts/desktop
+
+          ./modules/boot.nix
+          ./modules/dns.nix
+          ./modules/basic.nix
+
+          ./users/chlorodose.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.chlorodose = import ./users/chlorodose;
+          }
+        ];
+      };
   };
 }

@@ -7,6 +7,7 @@
     ./fonts
     ./fcitx5
     ./terminal
+    ./desktop
   ] else []);
   home.packages = with pkgs; [
     btop
