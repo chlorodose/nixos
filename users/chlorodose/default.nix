@@ -2,6 +2,7 @@
   imports = [
     ./fish
     ./gpg
+    ./fonts
     ../modules/basic-home.nix
   ];
   home.packages = with pkgs; [
