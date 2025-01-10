@@ -16,7 +16,7 @@
       system = "x86_64-linux";
       specialArgs = {
         proxyHost = "localhost";
-        isGpgHost = false;
+        isServer = true;
         pkgs-stable = import nixpkgs-stable { inherit system; };
       };
     in 

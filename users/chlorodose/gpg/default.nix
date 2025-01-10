@@ -1,4 +1,4 @@
-{ config, lib, pkgs, isGpgHost, ... }: {
+{ config, lib, pkgs, isServer, ... }: {
   programs.gpg = {
     enable = true;
     mutableKeys = false;
@@ -11,7 +11,7 @@
     ];
   };
   services.gpg-agent = {
-    enable = isGpgHost;
+    enable = !isServer;
     enableExtraSocket = true;
     enableSshSupport = true;
     sshKeys = "998ACE872695C6C0A6A69745E7AB158817E18A1F";
