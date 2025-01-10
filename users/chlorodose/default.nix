@@ -1,10 +1,11 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, isServer, ... }: {
   imports = [
     ./fish
     ./gpg
-    ./fonts
     ../modules/basic-home.nix
-  ];
+  ] ++ (if isServer then 
+  [ ./fonts ] 
+  else []);
   home.packages = with pkgs; [
     btop
     iotop
