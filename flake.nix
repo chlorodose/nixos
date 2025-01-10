@@ -62,7 +62,7 @@
           { networking.hostName = "cl-laptop"; }
           ./overlays
 
-          ./hosts/desktop
+          ./hosts/laptop
 
           ./modules/boot.nix
           ./modules/dns.nix
