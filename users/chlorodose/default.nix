@@ -1,6 +1,6 @@
 { config, lib, pkgs, isServer, ... }: {
   imports = [
-    ./fish
+    ./shell
     ./gpg
     ../modules/basic-home.nix
   ] ++ (if !isServer then [ 
