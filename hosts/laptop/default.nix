@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ./hardware.nix
-    ./desktop
+    ./desktop.nix
   ];
 }
