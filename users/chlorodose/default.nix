@@ -3,9 +3,10 @@
     ./fish
     ./gpg
     ../modules/basic-home.nix
-  ] ++ (if isServer then 
-  [ ./fonts ] 
-  else []);
+  ] ++ (if isServer then [ 
+    ./fonts
+    ./fcitx5
+  ] else []);
   home.packages = with pkgs; [
     btop
     iotop
