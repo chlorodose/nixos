@@ -3,7 +3,7 @@
     ./fish
     ./gpg
     ../modules/basic-home.nix
-  ] ++ (if isServer then [ 
+  ] ++ (if !isServer then [ 
     ./fonts
     ./fcitx5
   ] else []);
