@@ -3,7 +3,7 @@
     enable = true;
     wayland.enable = true;
   };
-  services.displayManager.defaultSession = "hyprland (uwsm-managed)";
+  services.displayManager.defaultSession = "hyprland-uwsm";
 
   programs.hyprland = {
     enable = true;
