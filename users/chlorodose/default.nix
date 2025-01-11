@@ -5,7 +5,6 @@
     ../modules/basic-home.nix
   ] ++ (if !isServer then [
     ./fonts
-    ./fcitx5
     ./desktop
     ./apps
   ] else [ ]);

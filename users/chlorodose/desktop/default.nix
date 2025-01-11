@@ -4,6 +4,5 @@
     ./dunst
     ./kitty
     ./fcitx5
-    ./wofi
   ];
 }
