@@ -1,3 +1,3 @@
-{ config, lib, pkgs, isServer, ... }: {
+{ config, lib, pkgs, ... }: {
   home.packages = [ pkgs.vscodium ];
 }
