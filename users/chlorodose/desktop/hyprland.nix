@@ -5,12 +5,14 @@
     xwayland.enable = true;
   };
 
+
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     bind = [
-      "$mod, space, exec, kitty"
-      "$mod, e, exec, codium"
-      "$mod, b, exec, firefox"
+      "$mod, space, exec, uwsm app -- kitty"
+      "$mod, e, exec, uwsm app -- codium"
+      "$mod, b, exec, uwsm app -- firefox"
+
 
       "$mod SHIFT, space, togglefloating,"
       "$mod SHIFT, f, fullscreen,"
