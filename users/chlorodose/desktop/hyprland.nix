@@ -5,7 +5,6 @@
     xwayland.enable = true;
   };
 
-
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     bind = [
@@ -19,5 +18,10 @@
 
       "$mod CTRL, e, exit,"
     ];
+    bindm = [
+      "$mod, mouse:272, movewindow"
+      "$mod ALT, mouse:272, resizewindow"
+    ];
+    decoration.blur.enabled = false;
   };
 }
