@@ -9,6 +9,8 @@
     ./terminal
     ./desktop
     ./vscodium
+    ./firefox
+
   ] else [ ]);
   home.packages = with pkgs; [
     btop
