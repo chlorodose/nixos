@@ -39,6 +39,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.chlorodose = import ./users/chlorodose;
             home-manager.users.ling = import ./users/ling;
@@ -73,6 +74,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.chlorodose = import ./users/chlorodose;
           }
