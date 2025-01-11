@@ -1,6 +1,9 @@
-{ config, lib, pkgs, isServer, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
-    ./hyprland.nix
-    ./notificaation.nix
+    ./hyprland
+    ./dunst
+    ./kitty
+    ./fcitx5
+    ./wofi
   ];
 }
