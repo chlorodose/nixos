@@ -24,5 +24,7 @@
     nixd
     nixpkgs-fmt
     nix-tree
+    brightnessctl
+    playerctl
   ];
 }
