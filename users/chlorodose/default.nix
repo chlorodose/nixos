@@ -24,5 +24,6 @@
     fastfetch
     nixd
     nixpkgs-fmt
+    nix-tree
   ];
 }
