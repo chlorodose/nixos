@@ -8,6 +8,7 @@
     ./fcitx5
     ./terminal
     ./desktop
+    ./vscodium
   ] else [ ]);
   home.packages = with pkgs; [
     btop
