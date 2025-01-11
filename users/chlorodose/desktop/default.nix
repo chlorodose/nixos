@@ -4,5 +4,6 @@
     ./dunst
     ./kitty
     ./fcitx5
+    ./waybar
   ];
 }
