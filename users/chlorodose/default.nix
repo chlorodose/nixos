@@ -3,12 +3,12 @@
     ./shell
     ./gpg
     ../modules/basic-home.nix
-  ] ++ (if !isServer then [ 
+  ] ++ (if !isServer then [
     ./fonts
     ./fcitx5
     ./terminal
     ./desktop
-  ] else []);
+  ] else [ ]);
   home.packages = with pkgs; [
     btop
     iotop

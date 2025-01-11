@@ -11,15 +11,15 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }: {
-    nixosConfigurations."cl-server" = 
-    let 
-      system = "x86_64-linux";
-      specialArgs = {
-        proxyHost = "localhost";
-        isServer = true;
-        pkgs-stable = import nixpkgs-stable { inherit system; };
-      };
-    in 
+    nixosConfigurations."cl-server" =
+      let
+        system = "x86_64-linux";
+        specialArgs = {
+          proxyHost = "localhost";
+          isServer = true;
+          pkgs-stable = import nixpkgs-stable { inherit system; };
+        };
+      in
       nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [
@@ -47,16 +47,16 @@
           }
         ];
       };
-    
-    nixosConfigurations."cl-laptop" = 
-    let 
-      system = "x86_64-linux";
-      specialArgs = {
-        proxyHost = "192.168.0.1";
-        isServer = false;
-        pkgs-stable = import nixpkgs-stable { inherit system; };
-      };
-    in 
+
+    nixosConfigurations."cl-laptop" =
+      let
+        system = "x86_64-linux";
+        specialArgs = {
+          proxyHost = "192.168.0.1";
+          isServer = false;
+          pkgs-stable = import nixpkgs-stable { inherit system; };
+        };
+      in
       nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [

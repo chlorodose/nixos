@@ -28,14 +28,14 @@
       DEADTIME = 5;
       NOCOMMWARNTIME = 30;
       NOTIFYFLAG = [
-        ["ONLINE" "SYSLOG"]
-        ["ONBATT" "SYSLOG+WALL+EXEC"]
-        ["LOWBATT" "SYSLOG+WALL+EXEC"]
+        [ "ONLINE" "SYSLOG" ]
+        [ "ONBATT" "SYSLOG+WALL+EXEC" ]
+        [ "LOWBATT" "SYSLOG+WALL+EXEC" ]
       ];
       POLLFREQ = 2;
       POLLFREQALERT = 1;
       RUN_AS_USER = "root";
       SHUTDOWNCMD = "${pkgs.systemd}/bin/systemctl poweroff";
     };
- };
+  };
 }

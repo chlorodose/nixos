@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   services.pppd.enable = true;
-  
+
   services.pppd.peers."wan" = {
     name = "wan";
     enable = true;

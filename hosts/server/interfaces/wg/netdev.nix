@@ -10,11 +10,12 @@
       PrivateKeyFile = "/etc/secrets/wireguard/private.key";
     };
     wireguardPeers = [
-      { # Phone
+      {
+        # Phone
         PublicKey = "12+lveD6bhdlprqxP9lxLx0nHpOI575L0ORbBjpUIys=";
         PresharedKeyFile = "/etc/secrets/wireguard/preshared/phone.key";
         PersistentKeepalive = 25;
-        AllowedIPs = [ "0.0.0.0/0" "::/0" ];        
+        AllowedIPs = [ "0.0.0.0/0" "::/0" ];
       }
     ];
   };

@@ -4,7 +4,7 @@
     systemd.enable = false; # for UWSM
     xwayland.enable = true;
   };
-  
+
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     bind = [
@@ -14,7 +14,7 @@
 
       "$mod SHIFT, space, togglefloating,"
       "$mod SHIFT, f, fullscreen,"
-      
+
       "$mod CTRL, e, exit,"
     ];
   };
