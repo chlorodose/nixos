@@ -26,5 +26,8 @@
     nix-tree
     brightnessctl
     playerctl
+    ripgrep
+    fd
+    lazygit
   ];
 }
