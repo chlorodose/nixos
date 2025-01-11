@@ -1,3 +1,3 @@
 { config, lib, pkgs, ... }: {
-  environment.systemPackages = [ pkgs.networkmanager ];
+  networking.networkmanager.enable = true;
 }
