@@ -22,6 +22,7 @@
     socat
     fastfetch
     nixd
+    nil
     nixpkgs-fmt
     nix-tree
     brightnessctl
