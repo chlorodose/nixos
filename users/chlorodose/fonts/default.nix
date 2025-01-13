@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
-  home.packages = [
-    pkgs.nerd-fonts.fira-code
+  home.packages = with pkgs; [
+    nerd-fonts.fira-code
+    wqy_zenhei
   ];
 }
