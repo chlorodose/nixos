@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, isServer, ... }: {
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 120;
@@ -9,6 +9,7 @@
   #  ${pkgs.coreutils}/bin/mv "/boot/loader/entries/''${default_entry}" "/boot/loader/entries/''${default_entry::-5}+1.conf"
   #  ${pkgs.gnused}/bin/sed -i '/^default/d' /boot/loader/loader.conf
   #'';
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages =
+    if isServer then pkgs.linuxPackages_latest else pkgs.linuxPackages_zen;
   systemd.watchdog.runtimeTime = "30s";
 }
