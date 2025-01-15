@@ -14,7 +14,7 @@
     options = "--delete-older-than 7d";
   };
   nix.settings.auto-optimise-store = true;
-
+  nix.settings.trusted-users = [ "root" "@wheel" ];
   nix.daemonCPUSchedPolicy =
     if isServer then "batch" else "idle"
   ;
