@@ -7,6 +7,17 @@
     gnupg
   ];
 
+  nix.gc = {
+    automatic = true;
+    dates = "03:15";
+    randomizedDelaySec = "30min";
+    options = "--delete-older-than 7d";
+  };
+  nix.optimise = {
+    automatic = true;
+    dates = [ "03:15" ];
+  };
+
   i18n = {
     defaultLocale = "C.UTF-8";
     supportedLocales = [
