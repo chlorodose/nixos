@@ -13,10 +13,7 @@
     randomizedDelaySec = "30min";
     options = "--delete-older-than 7d";
   };
-  nix.optimise = {
-    automatic = true;
-    dates = [ "03:15" ];
-  };
+  nix.settings.auto-optimise-store = true;
 
   nix.daemonCPUSchedPolicy =
     if isServer then "batch" else "idle"
