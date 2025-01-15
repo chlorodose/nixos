@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, isServer, ... }: {
   environment.systemPackages = with pkgs; [
     nano
     wget
@@ -17,6 +17,10 @@
     automatic = true;
     dates = [ "03:15" ];
   };
+
+  nix.daemonCPUSchedPolicy =
+    if isServer then "batch" else "idle"
+  ;
 
   i18n = {
     defaultLocale = "C.UTF-8";
