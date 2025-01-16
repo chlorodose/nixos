@@ -5,5 +5,6 @@
     ./fcitx5
     ./waybar
     ./swaync
+    ./rofi
   ];
 }
