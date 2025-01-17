@@ -1,32 +1,22 @@
 {
   description = "My configuration tree for nixos";
 
-  nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations."cl-server" =
       let
         system = "x86_64-linux";
         specialArgs = {
           proxyHost = "localhost";
           isServer = true;
-          pkgs-stable = import nixpkgs-stable { inherit system; };
+          inherit inputs;
         };
       in
       nixpkgs.lib.nixosSystem {
@@ -63,7 +53,7 @@
         specialArgs = {
           proxyHost = "192.168.0.1";
           isServer = false;
-          pkgs-stable = import nixpkgs-stable { inherit system; };
+          inherit inputs;
         };
       in
       nixpkgs.lib.nixosSystem {
