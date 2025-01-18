@@ -1,4 +1,6 @@
 {...}@args:
 {
-  nixpkgs.overlays = [];
+  nixpkgs.overlays = [
+    (import ./ppp.nix args)
+  ];
 }
