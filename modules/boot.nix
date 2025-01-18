@@ -2,19 +2,16 @@
 with lib;
 let cfg = config.host;
 in {
+  imports = [
+    ./basic.nix
+  ];
+
   options = {
     host.isInstalling = mkOption {
       default = false;
       type = types.bool;
       description = ''
         Set to true when running in the installation environment.
-      '';
-    };
-    host.isDesktop = mkOption {
-      default = false;
-      type = types.bool;
-      description = ''
-        Set to true when system is desktop.
       '';
     };
   };

@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    ./modules/basic.nix
     ./modules/boot.nix
   ];
 
