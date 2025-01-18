@@ -15,6 +15,8 @@ in {
   config = {
     environment.systemPackages = with pkgs; [ nano wget curl git gnupg ];
 
+    services.openssh.enable = !cfg.isDesktop;
+
     nix.gc = {
       automatic = true;
       dates = "03:15";
