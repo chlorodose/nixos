@@ -18,14 +18,12 @@
         cl-server = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = nixosSpecialArgs;
-          modules = nixosModules ++ [{}];
+          modules = nixosModules ++ [(import ./hosts/cl-server.nix)];
         };
         cl-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = nixosSpecialArgs;
-          modules = nixosModules ++ [{
-            host.isDesktop = true;
-          }];
+          modules = nixosModules ++ [(import ./hosts/cl-laptop.nix)];
         };
       };
   };
