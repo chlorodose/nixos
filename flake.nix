@@ -14,6 +14,17 @@
         (import ./configuration.nix)
       ];
       nixosSpecialArgs = {};
-      in {};
+      in {
+        cl-server = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = nixosSpecialArgs;
+          modules = nixosModules ++ [{}];
+        };
+        cl-laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = nixosSpecialArgs;
+          modules = nixosModules ++ [{}];
+        };
+      };
   };
 }
