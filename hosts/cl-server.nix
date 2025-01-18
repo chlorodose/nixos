@@ -1,3 +1,6 @@
 {
-  host.services.ddns.enable = true;
+  host.services = {
+    ddns.enable = true;
+    ups.enable = true;
+  };
 }

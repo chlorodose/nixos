@@ -8,6 +8,7 @@ in
     ./modules/basic.nix
     ./modules/boot.nix
     ./modules/services/ddns.nix
+    ./modules/services/ups.nix
   ];
 
   options = {};
