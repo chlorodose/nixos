@@ -5,11 +5,15 @@
     nixpkgs = {
       url =  "github:nixos/nixpkgs/nixos-unstable";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+    };
   };
 
-  outputs = { self, nixpkgs }@inputs: {
+  outputs = { self, nixpkgs, agenix }@inputs: {
     nixosConfigurations = let
       nixosModules = [
+        agenix.nixosModules.default
         (import ./overlays)
         (import ./configuration.nix)
       ];
