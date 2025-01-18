@@ -23,7 +23,9 @@
         cl-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = nixosSpecialArgs;
-          modules = nixosModules ++ [{}];
+          modules = nixosModules ++ [{
+            host.isDesktop = true;
+          }];
         };
       };
   };

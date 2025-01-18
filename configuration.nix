@@ -4,7 +4,9 @@ let
   cfg = config;
 in
 {
-  imports = [];
+  imports = [
+    ./modules/boot.nix
+  ];
 
   options = {};
 
