@@ -9,6 +9,11 @@ in {
   };
 
   config = {
+    age.secrets.cf-ddns = mkIf cfg.enable {
+      file = ../../secrets/cf-ddns.age;
+      mode = "400";
+      owner = "root";
+    };
     services.ddclient = mkIf cfg.enable {
       enable = true;
       verbose = true;
@@ -19,7 +24,7 @@ in {
       protocol = "cloudflare";
       zone = "chlorodose.me";
       username = "token";
-      passwordFile = "/etc/secrets/ddclient/secret.key";
+      passwordFile = age.secrets.cf-ddns.path;
       domains = [ "home-ppp.chlorodose.me" ];
     };
   };

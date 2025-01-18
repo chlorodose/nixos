@@ -7,6 +7,7 @@ in
   imports = [
     ./modules/basic.nix
     ./modules/boot.nix
+    ./modules/services/ddns.nix
   ];
 
   options = {};
