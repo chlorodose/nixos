@@ -2,12 +2,18 @@
   description = "My configuration for nixos";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs = {
+      url =  "github:nixos/nixpkgs/nixos-unstable";
     };
   };
 
-  outputs = { self, nixpkgs }@inputs: { };
+  outputs = { self, nixpkgs }@inputs: {
+    nixosConfigurations = let
+      nixosModules = [
+        (import ./overlays)
+        (import ./configuration.nix)
+      ];
+      nixosSpecialArgs = {};
+      in {};
+  };
 }
