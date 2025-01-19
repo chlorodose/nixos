@@ -7,6 +7,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+    };
     agenix = {
       url = "github:ryantm/agenix/main";
       inputs = {
@@ -20,7 +25,10 @@
     nixosConfigurations = let
       hmSpecialArgs = { };
       nixosSpecialArgs = { inherit hmSpecialArgs; };
-      hmModules = [ (import ./home.nix) ];
+      hmModules = [ 
+        inputs.nixvim.homeManagerModules.nixvim
+        (import ./home.nix)
+      ];
       nixosModules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
