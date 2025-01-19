@@ -3,6 +3,7 @@
     ./modules/basic.nix
     ./modules/boot.nix
     ./modules/desktop.nix
+    ./modules/fonts.nix
     ./modules/services/ddns.nix
     ./modules/services/ups.nix
     ./modules/services/mihomo.nix
