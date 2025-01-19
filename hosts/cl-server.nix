@@ -47,62 +47,26 @@ with lib; {
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
 
+  systemd.network.networks."10-container-ve" = {
+    matchConfig = {
+      Kind = "veth";
+      Name = "ve-*";
+    };
+    networkConfig = { Bridge = "lan"; };
+  };
+  systemd.network.networks."10-base-wan" = {
+    matchConfig = { Name = "enp6s0"; };
+    linkConfig = { Unmanaged = true; };
+  };
+
   networking = {
     interfaces.lan.ipv4.addresses = [{
       address = "192.168.0.1";
       prefixLength = 24;
     }];
     bridges.lan.interfaces = [ "enp4s0f0" "enp4s0f1" ];
-    systemd.network.networks."10-container-ve" = {
-      matchConfig = {
-        Kind = "veth";
-        Name = "ve-*";
-      };
-      networkConfig = { Bridge = "lan"; };
-    };
 
-    systemd.network.networks."10-base-wan" = {
-      matchConfig = { Name = "enp6s0"; };
-      linkConfig = { Unmanaged = true; };
-    };
-    interfaces.wan = { useDHCP = true; };
-    services.pppd.enable = true;
-    services.pppd.peers."wan" = {
-      name = "wan";
-      enable = true;
-      config = ''
-        plugin pppoe.so
-
-        linkname wan
-        ifname wan
-
-        enp6s0
-
-        persist
-        lcp-echo-interval 15
-        lcp-echo-failure 3
-
-        deflate 15
-        predictor1
-        bsdcomp 15
-
-        noauth
-        file /etc/secrets/ppp/secret.conf
-
-        noproxyarp
-        nodefaultroute
-
-        up_sdnotify
-      '';
-    };
-    systemd.services."pppd-wan" = {
-      bindsTo = [ "sys-subsystem-net-devices-enp6s0.device" ];
-      after = [ "sys-subsystem-net-devices-enp6s0.device" ];
-      serviceConfig = { Type = "notify"; };
-      preStart = "${pkgs.iproute2}/bin/ip link set enp6s0 up";
-      postStart = "${pkgs.systemd}/bin/networkctl reconfigure wan";
-    };
-    networking.nftables.tables."pppoe" = {
+    nftables.tables."pppoe" = {
       name = "pppoe";
       family = "inet";
       content = ''
@@ -113,6 +77,7 @@ with lib; {
         }
       '';
     };
+    interfaces.wan = { useDHCP = true; };
 
     nat = {
       enable = true;
@@ -128,12 +93,6 @@ with lib; {
       interfaces.wan.allowedUDPPorts = [ 68 546 ];
     };
 
-    age.secrets.wg-private = {
-      file = ../secrets/wg-private.age;
-      mode = "440";
-      owner = "root";
-      group = "systemd-network";
-    };
     wireguard.interfaces.wg = {
       ips = [ "192.168.1.1/24" ];
       listenPort = 51820;
@@ -148,11 +107,53 @@ with lib; {
         };
       };
     };
-    age.secrets.wg-ps-phone = {
-      file = ../secrets/wg-ps-phone.age;
-      mode = "440";
-      owner = "root";
-      group = "systemd-network";
-    };
+  };
+  services.pppd.enable = true;
+  services.pppd.peers."wan" = {
+    name = "wan";
+    enable = true;
+    config = ''
+      plugin pppoe.so
+
+      linkname wan
+      ifname wan
+
+      enp6s0
+
+      persist
+      lcp-echo-interval 15
+      lcp-echo-failure 3
+
+      deflate 15
+      predictor1
+      bsdcomp 15
+
+      noauth
+      file /etc/secrets/ppp/secret.conf
+
+      noproxyarp
+      nodefaultroute
+
+      up_sdnotify
+    '';
+  };
+  systemd.services."pppd-wan" = {
+    bindsTo = [ "sys-subsystem-net-devices-enp6s0.device" ];
+    after = [ "sys-subsystem-net-devices-enp6s0.device" ];
+    serviceConfig = { Type = "notify"; };
+    preStart = "${pkgs.iproute2}/bin/ip link set enp6s0 up";
+    postStart = "${pkgs.systemd}/bin/networkctl reconfigure wan";
+  };
+  age.secrets.wg-private = {
+    file = ../secrets/wg-private.age;
+    mode = "440";
+    owner = "root";
+    group = "systemd-network";
+  };
+  age.secrets.wg-ps-phone = {
+    file = ../secrets/wg-ps-phone.age;
+    mode = "440";
+    owner = "root";
+    group = "systemd-network";
   };
 }
