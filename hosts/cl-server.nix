@@ -59,6 +59,74 @@ with lib; {
     linkConfig = { Unmanaged = true; };
   };
 
+  systemd.network.networks."10-lan" = {
+    matchConfig = { Name = "lan"; };
+    networkConfig = {
+      Address = [ "192.168.0.1/24" ];
+      LLDP = true;
+      EmitLLDP = true;
+      MulticastDNS = true;
+      LLMNR = true;
+      DHCPServer = true;
+      IPv6SendRA = true;
+      IPv6AcceptRA = false;
+      DHCPPrefixDelegation = true;
+      IPv4Forwarding = true;
+      IPv6Forwarding = true;
+    };
+    dhcpServerConfig = {
+      PoolOffset = 100;
+      PoolSize = 128;
+      EmitDNS = true;
+      DNS = [
+        "223.5.5.5" # "1.1.1.1"
+      ];
+      EmitRouter = true;
+      EmitTimezone = true;
+      # SendOption = "121:192.168.1.0/24:192.168.0.1";
+    };
+    dhcpPrefixDelegationConfig = {
+      UplinkInterface = "wan";
+      SubnetId = 0;
+      Announce = true;
+    };
+    ipv6SendRAConfig = {
+      Managed = true;
+      OtherInformation = true;
+      EmitDNS = true;
+      DNS = [
+        "2400:3200::1" # "2606:4700:4700::1111"
+      ];
+    };
+    bridgeConfig = { ProxyARP = true; };
+  };
+  systemd.network.networks."10-wan" = {
+    matchConfig = {
+      Type = "ppp";
+      Name = "wan";
+    };
+    linkConfig = { RequiredForOnline = true; };
+    networkConfig = {
+      DHCP = "ipv6";
+      LLMNR = false;
+      IPv6AcceptRA = true;
+      KeepConfiguration = true;
+      DefaultRouteOnDevice = true;
+      IPv4Forwarding = true;
+      IPv6Forwarding = true;
+      DHCPPrefixDelegation = true;
+    };
+    dhcpPrefixDelegationConfig = {
+      UplinkInterface = ":self";
+      SubnetId = 0;
+      Announce = false;
+      RouteMetric = 4294967295;
+    };
+    dhcpV6Config = {
+      UseAddress = true;
+      UseDelegatedPrefix = true;
+    };
+  };
   networking = {
     interfaces.lan.ipv4.addresses = [{
       address = "192.168.0.1";
@@ -97,15 +165,13 @@ with lib; {
       ips = [ "192.168.1.1/24" ];
       listenPort = 51820;
       privateKeyFile = config.age.secrets.wg-private.path;
-      peers = {
-        phone = {
-          name = "phone";
-          persistentKeepalive = 25;
-          allowedIPs = [ "192.168.1.2/24" ];
-          publicKey = "12+lveD6bhdlprqxP9lxLx0nHpOI575L0ORbBjpUIys=";
-          presharedKeyFile = config.age.secrets.wg-ps-phone.path;
-        };
-      };
+      peers = [{
+        name = "phone";
+        persistentKeepalive = 25;
+        allowedIPs = [ "192.168.1.2/24" ];
+        publicKey = "12+lveD6bhdlprqxP9lxLx0nHpOI575L0ORbBjpUIys=";
+        presharedKeyFile = config.age.secrets.wg-ps-phone.path;
+      }];
     };
   };
   services.pppd.enable = true;

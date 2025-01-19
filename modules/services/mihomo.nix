@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib;
-let cfg = host.services.mihomo;
+let cfg = config.host.services.mihomo;
 in {
   imports = [ ../basic.nix ];
 
@@ -8,7 +8,7 @@ in {
     host.services.mihomo = { enable = mkEnableOption "Enable mihomo service"; };
     networking.proxyHost = mkOption {
       default = if cfg.enable then "127.0.0.1" else null;
-      type = types.nullOr types.string;
+      type = types.nullOr types.str;
       description = ''
         Hostname use for proxy.
       '';

@@ -1,6 +1,6 @@
 { config, lib, ... }:
 with lib;
-let cfg = host.services.ddns;
+let cfg = config.host.services.ddns;
 in {
   imports = [ ../basic.nix ];
 

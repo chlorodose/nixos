@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
-let cfg = host.services.ups;
+let cfg = config.host.services.ups;
 in {
   imports = [ ../basic.nix ];
 

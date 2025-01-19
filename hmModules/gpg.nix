@@ -16,13 +16,13 @@ in {
   config = {
     programs.gpg = {
       enable = true;
-      publicKeys = mkIf (cfg.gpg != null) [{
-        source = cfg.gpg;
+      publicKeys = mkIf (cfg.myKey != null) [{
+        source = cfg.myKey;
         trust = 5;
       }];
     };
     services.gpg-agent = {
-      enable = hostConfig.isDesktop;
+      enable = hostConfig.host.isDesktop;
       enableExtraSocket = true;
       enableSshSupport = true;
       sshKeys = [ "998ACE872695C6C0A6A69745E7AB158817E18A1F" ];

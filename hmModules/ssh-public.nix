@@ -11,7 +11,7 @@ in
   options = {
     user.authorizedKey = mkOption {
       default = null;
-      type = types.nullOr types.string;
+      type = types.nullOr types.lines;
     };
   };
 

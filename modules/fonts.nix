@@ -1,10 +1,10 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib;{
   imports = [
     ./basic.nix
   ];
-  environment.systemPackages = with pkgs; [
-    fira-code-nerdfont
+  environment.systemPackages = mkIf config.host.isDesktop (with pkgs; [
+    nerd-fonts.fira-code
     wqy_zenhei
-  ];
+  ]);
 }
