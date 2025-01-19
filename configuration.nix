@@ -6,6 +6,7 @@
     ./modules/services/ddns.nix
     ./modules/services/ups.nix
     ./modules/services/mihomo.nix
+    ./modules/users/chlorodose.nix
   ];
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;

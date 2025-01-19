@@ -20,9 +20,11 @@
     nixosConfigurations = let
       hmSpecialArgs = { };
       nixosSpecialArgs = { inherit hmSpecialArgs; };
+      hmModules = [ (import ./home.nix) ];
       nixosModules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
+        { home-manager.sharedModules = hmModules; }
         (import ./overlays)
         (import ./configuration.nix)
       ];

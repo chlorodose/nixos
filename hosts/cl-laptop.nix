@@ -1,6 +1,7 @@
 {...}:
 {
   host.isDesktop = true;
+  user.users.chlorodose.enable = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];

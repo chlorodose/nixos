@@ -6,6 +6,7 @@ with lib; {
     ups.enable = true;
     mihomo.enable = true; # TODO: Replace mihomo to other proxy service
   };
+  user.users.chlorodose.enable = true;
 
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "ehci_pci" "ahci" "nvme" "sd_mod" ];
