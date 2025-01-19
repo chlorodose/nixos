@@ -1,13 +1,6 @@
 { config, hmSpecialArgs, ... }: {
   imports = [
-    ./modules/basic.nix
-    ./modules/boot.nix
-    ./modules/desktop.nix
-    ./modules/fonts.nix
-    ./modules/services/ddns.nix
-    ./modules/services/ups.nix
-    ./modules/services/mihomo.nix
-    ./modules/users/chlorodose.nix
+    ./modules
   ];
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
