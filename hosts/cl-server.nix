@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib; {
   host.isDesktop = false;
   host.services = {
@@ -115,15 +115,43 @@ with lib; {
 
     nat = {
       enable = true;
-      internalInterfaces = [ "lan" ];
+      internalInterfaces = [ "lan" "wg" ];
       externalInterface = "wan";
     };
 
     firewall = {
-      trustedInterfaces = [ "lan" ];
+      trustedInterfaces = [ "lan" "wg" ];
       rejectPackets = true;
       filterForward = true;
+      allowedUDPPorts = [ 51820 ];
       interfaces.wan.allowedUDPPorts = [ 68 546 ];
+    };
+
+    age.secrets.wg-private = {
+      file = ../secrets/wg-private.age;
+      mode = "440";
+      owner = "root";
+      group = "systemd-network";
+    };
+    wireguard.interfaces.wg = {
+      ips = [ "192.168.1.1/24" ];
+      listenPort = 51820;
+      privateKeyFile = config.age.secrets.wg-private.path;
+      peers = {
+        phone = {
+          name = "phone";
+          persistentKeepalive = 25;
+          allowedIPs = [ "192.168.1.2/24" ];
+          publicKey = "12+lveD6bhdlprqxP9lxLx0nHpOI575L0ORbBjpUIys=";
+          presharedKeyFile = config.age.secrets.wg-ps-phone.path;
+        };
+      };
+    };
+    age.secrets.wg-ps-phone = {
+      file = ../secrets/wg-ps-phone.age;
+      mode = "440";
+      owner = "root";
+      group = "systemd-network";
     };
   };
 }
