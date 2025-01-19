@@ -13,6 +13,29 @@ in {
   };
 
   config = {
+    home.packages = with pkgs; [
+      btop
+      iotop
+      iftop
+      strace
+      ltrace
+      lsof
+      lm_sensors
+      pciutils
+      usbutils
+      nmap
+      socat
+      fastfetch
+      nixd
+      nixpkgs-fmt
+      nix-tree
+      brightnessctl
+      playerctl
+      ripgrep
+      fd
+      lazygit
+    ];
+
     programs.home-manager.enable = true;
 
     home.language.base = "zh_CN.UTF-8";
