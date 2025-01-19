@@ -2,33 +2,41 @@
   description = "My configuration for nixos";
 
   inputs = {
-    nixpkgs = {
-      url =  "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
-      url = "github:ryantm/agenix";
+      url = "github:ryantm/agenix/main";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
   };
 
-  outputs = { self, nixpkgs, agenix }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix }@inputs: {
     nixosConfigurations = let
+      hmSpecialArgs = { };
+      nixosSpecialArgs = { inherit hmSpecialArgs; };
       nixosModules = [
+        home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         (import ./overlays)
         (import ./configuration.nix)
       ];
-      nixosSpecialArgs = {};
-      in {
-        cl-server = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = nixosSpecialArgs;
-          modules = nixosModules ++ [(import ./hosts/cl-server.nix)];
-        };
-        cl-laptop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = nixosSpecialArgs;
-          modules = nixosModules ++ [(import ./hosts/cl-laptop.nix)];
-        };
+    in {
+      cl-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = nixosSpecialArgs;
+        modules = nixosModules ++ [ (import ./hosts/cl-server.nix) ];
       };
+      cl-laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = nixosSpecialArgs;
+        modules = nixosModules ++ [ (import ./hosts/cl-laptop.nix) ];
+      };
+    };
   };
 }

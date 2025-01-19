@@ -1,9 +1,4 @@
-{ config, pkgs, lib, ... }:
-with lib;
-let 
-  cfg = config;
-in
-{
+{ config, hmSpecialArgs, ... }: {
   imports = [
     ./modules/basic.nix
     ./modules/boot.nix
@@ -12,8 +7,9 @@ in
     ./modules/services/ups.nix
     ./modules/services/mihomo.nix
   ];
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "backup";
 
-  options = {};
-
-  config = {};
+  home-manager.extraSpecialArgs = hmSpecialArgs // { hostConfig = config; };
 }
