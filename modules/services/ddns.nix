@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 with lib;
 let cfg = host.services.ddns;
 in {
@@ -24,7 +24,7 @@ in {
       protocol = "cloudflare";
       zone = "chlorodose.me";
       username = "token";
-      passwordFile = age.secrets.cf-ddns.path;
+      passwordFile = config.age.secrets.cf-ddns.path;
       domains = [ "home-ppp.chlorodose.me" ];
     };
   };
