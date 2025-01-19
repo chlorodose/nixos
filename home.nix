@@ -1,1 +1,6 @@
-{ ... }: { imports = [ ./hmModules/basic.nix ]; }
+{ ... }: { 
+  imports = [ 
+    ./hmModules/basic.nix 
+    ./hmModules/fish.nix 
+  ]; 
+}

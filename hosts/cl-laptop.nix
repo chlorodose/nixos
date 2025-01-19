@@ -28,4 +28,5 @@
   hardware.cpu.intel.updateMicrocode = true;
 
   networking.networkmanager.enable = true;
+  networking.proxyHost = "192.168.0.1";
 }

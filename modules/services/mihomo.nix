@@ -6,6 +6,13 @@ in {
 
   options = {
     host.services.mihomo = { enable = mkEnableOption "Enable mihomo service"; };
+    networking.proxyHost = mkOption {
+      default = if cfg.enable then "127.0.0.1" else null;
+      type = types.nullOr types.string;
+      description = ''
+        Hostname use for proxy.
+      '';
+    };
   };
 
   config = {
