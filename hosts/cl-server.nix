@@ -13,6 +13,7 @@ with lib; {
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  hardware.enableRedistributableFirmware = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f897c054-be68-423a-b558-089cc3d5e302";
