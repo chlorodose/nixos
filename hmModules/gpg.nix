@@ -25,6 +25,7 @@ in {
       enable = hostConfig.host.isDesktop;
       enableExtraSocket = true;
       enableSshSupport = true;
+      enableScDaemon = true;
       sshKeys = [ "998ACE872695C6C0A6A69745E7AB158817E18A1F" ];
       pinentryPackage = pkgs.pinentry-all;
     };
