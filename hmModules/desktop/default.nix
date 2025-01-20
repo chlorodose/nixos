@@ -5,5 +5,6 @@
     ./kitty.nix
     ./rofi.nix
     ./swaync.nix
+    ./pass.nix
   ];
 }
